@@ -85,6 +85,7 @@ h1 { font-size: clamp(40px, 6.2vw, 98px); line-height: 1; letter-spacing: -0.035
 .fine { margin: 14px 0 0; max-width: 34em; font-size: 13px; line-height: 1.55; opacity: 0.82; }
 .hero-cta, .closing-cta { display: grid; gap: 18px; justify-items: start; }
 .closing-cta { justify-items: center; }
+.mail-note { margin: 12px 0 0; font-size: 13px; letter-spacing: 0.02em; opacity: 0.8; user-select: all; }
 .hero .credit { position: absolute; right: max(var(--gutter), env(safe-area-inset-right, 0px)); bottom: 16px; margin: 0; }
 
 /* why */
@@ -226,7 +227,7 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
       <a href="#faq">Questions</a>
     </nav>
     <a class="logo" href="#top" aria-label="RoomReady home"></a>
-    <div class="nav-right"><a class="link-cta" data-cta="talk" href="#signup">Talk with us</a></div>
+    <div class="nav-right"><a class="link-cta" data-cta="form" href="#signup">Talk with us</a></div>
   </div>
   <div class="wrap hero-body">
     <h1>We set up your apartment before you land.</h1>
@@ -235,10 +236,7 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
         <p class="sub">You send photos of rooms you like. We plan your place around them and have everything delivered and built before your flight.</p>
         <p class="fine">We’re five Cornell students and we haven’t launched yet. Right now we’re doing short calls with students to hear how their move is going.</p>
       </div>
-      <div class="hero-cta">
-        <a class="btn btn-white" data-cta="talk" href="#signup">Talk with us (15 min)</a>
-        <a class="link-cta" data-cta="quick" href="#signup">Or answer 5 quick questions (2 min)</a>
-      </div>
+      <div class="hero-cta"><a class="btn btn-white" data-cta="form" href="#signup">Tell us about your move</a></div>
     </div>
     <p class="credit">Inspiration photo · Clay Banks / Unsplash</p>
   </div>
@@ -315,7 +313,7 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
           <li><button type="button" class="check" id="fit-stay" aria-pressed="false"><span class="box"><svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#FEFDFB" stroke-width="2.2" stroke-linecap="square"/></svg></span>I’ll study in the US for two years or more.</button></li>
         </ul>
         <p class="result" id="fit-result" aria-live="polite">Tap the ones that are true for you.</p>
-        <a class="btn btn-line" data-cta="talk" href="#signup">Talk with us (15 min)</a>
+        <a class="btn btn-line" data-cta="form" href="#signup">Tell us about your move</a>
       </div>
     </div>
   </section>
@@ -332,7 +330,7 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
         <details class="qa"><summary>Is RoomReady open yet? <span class="pm" aria-hidden="true"></span></summary><p>No. We’re five Cornell students, and we’re still working out the details by talking to students who are moving.</p></details>
         <details class="qa"><summary>Which cities will you start in? <span class="pm" aria-hidden="true"></span></summary><p>A few college towns first. If you tell us where you’re moving, it helps us decide.</p></details>
         <details class="qa"><summary>What happens on the 15-minute call? <span class="pm" aria-hidden="true"></span></summary><p>We ask how your move is going and what your place is like. That’s it. We won’t try to sell you anything.</p></details>
-        <details class="qa"><summary>Can I help without a call? <span class="pm" aria-hidden="true"></span></summary><p>Yes. You can answer five quick questions about your move instead. It takes about two minutes.</p></details>
+        <details class="qa"><summary>Can I help without a call? <span class="pm" aria-hidden="true"></span></summary><p>Yes. In the form you can pick five quick questions instead of a chat. It takes about two minutes. You can also just send us an email.</p></details>
       </div>
     </div>
   </section>
@@ -341,11 +339,12 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
     <img class="bg" src="img/bright.jpg" alt="" loading="lazy">
     <div class="wrap">
       <p class="big" id="signup-title">Tell us about your move.</p>
-      <p class="closing-copy">A 15-minute chat helps us most. If you only have two minutes, the short form helps too.</p>
+      <p class="closing-copy">Fill out a short form, or send us an email. We already wrote the email for you, so you can just press send.</p>
       <div class="closing-cta">
-        <a class="btn btn-white" data-cta="talk" href="#signup">Talk with us (15 min)</a>
-        <a class="link-cta" data-cta="quick" href="#signup">Or answer 5 quick questions (2 min)</a>
+        <a class="btn btn-white" data-cta="form" href="#signup">Open the form</a>
+        <a class="link-cta" data-cta="email" href="mailto:roomready4u@gmail.com">Or send us an email</a>
       </div>
+      <p class="mail-note">roomready4u@gmail.com</p>
       <p class="pending" id="pending" hidden>Sign-up form not linked yet.</p>
     </div>
     <p class="credit">Inspiration photo · Clay Banks / Unsplash</p>
@@ -361,9 +360,12 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
 </footer>
 
 <script>
-/* Google Form links. "talk" buttons open the form with the chat picked; "quick" links open it with the five questions picked. */
-const FORM_TALK = "https://docs.google.com/forms/d/e/1FAIpQLSfOc8ydKSUSxoryVOEhwUHXhcCX-wBlaoT07FW-UBROEFtYAA/viewform?usp=pp_url&entry.735531052=Talk+with+us+for+15+minutes";
-const FORM_QUICK = "https://docs.google.com/forms/d/e/1FAIpQLSfOc8ydKSUSxoryVOEhwUHXhcCX-wBlaoT07FW-UBROEFtYAA/viewform?usp=pp_url&entry.735531052=Answer+5+quick+questions+(about+2+minutes)";
+/* Every "form" button opens the Google Form. The "email" link opens a ready-written email to the team. */
+const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfOc8ydKSUSxoryVOEhwUHXhcCX-wBlaoT07FW-UBROEFtYAA/viewform";
+const EMAIL = "roomready4u@gmail.com";
+const MAIL_SUBJECT = "15-minute chat about my move";
+const MAIL_BODY = "Hi RoomReady team,\n\nI'm happy to talk about my move to the US for 15 minutes. Please reply with a few times that work.\n\nThanks,\n";
+const MAILTO = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(MAIL_SUBJECT) + "&body=" + encodeURIComponent(MAIL_BODY.replace(/\n/g, "\r\n"));
 
 /* Axonometric ink drawing of one room on move-in day.
    Layers reveal with progress p (0..1): empty room -> plan marks -> furniture -> styling.
@@ -576,8 +578,11 @@ function drawRoomLine(svg, idp) {
 
 (function () {
   const ctas = document.querySelectorAll('[data-cta]');
-  if (FORM_TALK) ctas.forEach(a => { a.href = a.dataset.cta === 'quick' ? FORM_QUICK : FORM_TALK; a.target = '_blank'; a.rel = 'noopener'; });
-  else document.getElementById('pending').hidden = false;
+  ctas.forEach(a => {
+    if (a.dataset.cta === 'email') { a.href = MAILTO; return; }
+    if (FORM_URL) { a.href = FORM_URL; a.target = '_blank'; a.rel = 'noopener'; }
+  });
+  if (!FORM_URL) document.getElementById('pending').hidden = false;
 
   // Story: scroll position sets a target; each frame eases 20% toward it.
   const story = drawRoomLine(document.getElementById('plate-story'), 'ps');

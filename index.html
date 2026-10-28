@@ -215,6 +215,31 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
   .plate { min-height: 420px; }
   .step, .step:not(.is-on) { display: grid; opacity: 1; }
 }
+
+/* note pop-up */
+html.ask-open { overflow: hidden; }
+.ask { position: fixed; width: min(540px, calc(100vw - 32px)); max-height: calc(100svh - 32px); margin: auto; padding: 0; border: 0; background: var(--paper); color: var(--ink); box-shadow: 0 30px 80px rgba(0,0,0,.28); overflow: auto; }
+.ask::backdrop { background: rgba(18,18,18,.56); }
+.ask[open] { animation: ask-in .32s cubic-bezier(.2,.7,.2,1) both; }
+.ask[open]::backdrop { animation: ask-fade .32s ease both; }
+@keyframes ask-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes ask-fade { from { opacity: 0; } to { opacity: 1; } }
+.ask-in { padding: clamp(28px, 4.4vw, 44px); }
+.ask-in h2 { font-size: clamp(26px, 3vw, 36px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 700; margin: 0; }
+.ask-lede { margin: 12px 0 0; font-size: 15px; line-height: 1.6; color: var(--grey); }
+.ask-lab { display: block; margin: 24px 0 8px; font: 700 11px/1 var(--sans); letter-spacing: 0.15em; text-transform: uppercase; }
+.ask input, .ask textarea { display: block; width: 100%; border: 1px solid #cfcac3; border-radius: 0; background: #fff; color: var(--ink); font: 400 16px/1.55 var(--sans); padding: 12px 14px; }
+.ask textarea { min-height: 168px; resize: vertical; }
+.ask input:focus-visible, .ask textarea:focus-visible { outline: 2px solid var(--ink); outline-offset: -1px; }
+.ask-hp { position: absolute !important; left: -9999px; width: 1px !important; height: 1px; opacity: 0; }
+.ask-send { width: 100%; margin-top: 24px; cursor: pointer; font-family: var(--sans); }
+.ask-send:disabled { opacity: .6; cursor: progress; }
+.ask-err { margin: 14px 0 0; font-size: 14px; color: var(--clay); }
+.ask-fine { margin: 14px 0 0; font-size: 12px; line-height: 1.5; color: var(--grey); }
+.ask-x { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.ask-x:hover { background: var(--plate); }
+@media (max-width: 760px) { .ask textarea { min-height: 212px; } }
+@media (prefers-reduced-motion: reduce) { .ask[open], .ask[open]::backdrop { animation: none; } }
 </style>
 </head>
 <body>
@@ -227,16 +252,16 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
       <a href="#faq">Questions</a>
     </nav>
     <a class="logo" href="#top" aria-label="RoomReady home"></a>
-    <div class="nav-right"><a class="link-cta" data-cta="form" href="#signup">Talk with us</a></div>
+    <div class="nav-right"><a class="link-cta" data-note href="#signup">I’m interested</a></div>
   </div>
   <div class="wrap hero-body">
     <h1>We set up your apartment before you land.</h1>
     <div class="hero-row">
       <div>
         <p class="sub">You send photos of rooms you like. We plan your place around them and have everything delivered and built before your flight.</p>
-        <p class="fine">We’re five Cornell students and we haven’t launched yet. Right now we’re doing short calls with students to hear how their move is going.</p>
+        <p class="fine">We’re five Cornell students and we haven’t launched yet. If this sounds useful, send us a note and we’ll write back.</p>
       </div>
-      <div class="hero-cta"><a class="btn btn-white" data-cta="form" href="#signup">Tell us about your move</a></div>
+      <div class="hero-cta"><a class="btn btn-white" data-note href="#signup">I’m interested</a></div>
     </div>
     <p class="credit">Inspiration photo · Clay Banks / Unsplash</p>
   </div>
@@ -294,7 +319,7 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
       <div class="price-foot">
         <p>That covers design, furniture, delivery, assembly and styling. It’s a one-time payment, not a rental, so you keep everything.</p>
         <p>Half is due when you approve the plan, the rest before we install. Booking early takes 5% off.</p>
-        <p class="note">We’re still testing these prices, so they could change. You don’t pay anything on the call.</p>
+        <p class="note">We’re still testing these prices, so they could change. Sending a note doesn’t commit you to anything.</p>
       </div>
     </div>
   </section>
@@ -313,7 +338,7 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
           <li><button type="button" class="check" id="fit-stay" aria-pressed="false"><span class="box"><svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#FEFDFB" stroke-width="2.2" stroke-linecap="square"/></svg></span>I’ll study in the US for two years or more.</button></li>
         </ul>
         <p class="result" id="fit-result" aria-live="polite">Tap the ones that are true for you.</p>
-        <a class="btn btn-line" data-cta="form" href="#signup">Tell us about your move</a>
+        <a class="btn btn-line" data-note href="#signup">I’m interested</a>
       </div>
     </div>
   </section>
@@ -329,8 +354,7 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
         <details class="qa"><summary>Who pays, me or my parents? <span class="pm" aria-hidden="true"></span></summary><p>Whoever you like. You plan it with us and either of you can pay. The price is fixed before we buy anything.</p></details>
         <details class="qa"><summary>Is RoomReady open yet? <span class="pm" aria-hidden="true"></span></summary><p>No. We’re five Cornell students, and we’re still working out the details by talking to students who are moving.</p></details>
         <details class="qa"><summary>Which cities will you start in? <span class="pm" aria-hidden="true"></span></summary><p>A few college towns first. If you tell us where you’re moving, it helps us decide.</p></details>
-        <details class="qa"><summary>What happens on the 15-minute call? <span class="pm" aria-hidden="true"></span></summary><p>We ask how your move is going and what your place is like. That’s it. We won’t try to sell you anything.</p></details>
-        <details class="qa"><summary>Can I help without a call? <span class="pm" aria-hidden="true"></span></summary><p>Yes. In the form you can pick five quick questions instead of a chat. It takes about two minutes. You can also just send us an email.</p></details>
+        <details class="qa"><summary>What happens after I send a note? <span class="pm" aria-hidden="true"></span></summary><p>One of us will write back to say hello. If you have time, we may ask a few questions about your move. We won’t try to sell you anything.</p></details>
       </div>
     </div>
   </section>
@@ -338,18 +362,40 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
   <section class="closing" id="signup" aria-labelledby="signup-title">
     <img class="bg" src="img/bright.jpg" alt="" loading="lazy">
     <div class="wrap">
-      <p class="big" id="signup-title">Tell us about your move.</p>
-      <p class="closing-copy">Fill out a short form, or send us an email. We already wrote the email for you, so you can just press send.</p>
-      <div class="closing-cta">
-        <a class="btn btn-white" data-cta="form" href="#signup">Open the form</a>
-        <a class="link-cta" data-cta="email" href="mailto:roomready4u@gmail.com">Or send us an email</a>
-      </div>
-      <p class="mail-note">roomready4u@gmail.com</p>
-      <p class="pending" id="pending" hidden>Sign-up form not linked yet.</p>
+      <p class="big" id="signup-title">Want to hear more?</p>
+      <p class="closing-copy">Send us a quick note. We already wrote it, so you only need to add your email.</p>
+      <div class="closing-cta"><a class="btn btn-white" data-note href="#signup">Send a note</a></div>
     </div>
     <p class="credit">Inspiration photo · Clay Banks / Unsplash</p>
   </section>
 </main>
+
+<dialog class="ask" id="ask" aria-labelledby="ask-title">
+  <button type="button" class="ask-x" data-close aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+  <form class="ask-in" id="ask-form" novalidate>
+    <p class="label">A note to RoomReady</p>
+    <h2 id="ask-title">Send us a quick note</h2>
+    <p class="ask-lede">We already wrote it. Add your email, change anything you like, and press send.</p>
+    <label class="ask-lab" for="ask-email">Your email</label>
+    <input id="ask-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+    <label class="ask-lab" for="ask-msg">Message</label>
+    <textarea id="ask-msg" name="message" rows="6" required>Hi RoomReady team,
+
+I’m interested in RoomReady and I’d like to hear more when you’re ready.
+
+Thanks!</textarea>
+    <input class="ask-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <p class="ask-err" id="ask-err" role="alert" hidden></p>
+    <button class="btn ask-send" type="submit" id="ask-send">Send</button>
+    <p class="ask-fine">Your note goes to roomready4u@gmail.com. We only use your email to write back to you.</p>
+  </form>
+  <div class="ask-in" id="ask-done" hidden>
+    <p class="label">Sent</p>
+    <h2>Thank you.</h2>
+    <p class="ask-lede">Your note is on its way. One of us will write back soon.</p>
+    <button class="btn ask-send" type="button" data-close>Close</button>
+  </div>
+</dialog>
 
 <footer class="foot">
   <div class="wrap foot-in">
@@ -360,12 +406,10 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
 </footer>
 
 <script>
-/* Every "form" button opens the Google Form. The "email" link opens a ready-written email to the team. */
-const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfOc8ydKSUSxoryVOEhwUHXhcCX-wBlaoT07FW-UBROEFtYAA/viewform";
-const EMAIL = "roomready4u@gmail.com";
-const MAIL_SUBJECT = "15-minute chat about my move";
-const MAIL_BODY = "Hi RoomReady team,\n\nI'm happy to talk about my move to the US for 15 minutes. Please reply with a few times that work.\n\nThanks,\n";
-const MAILTO = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(MAIL_SUBJECT) + "&body=" + encodeURIComponent(MAIL_BODY.replace(/\n/g, "\r\n"));
+/* The note pop-up posts to a Google Form in the RoomReady account. A script there emails each note to roomready4u@gmail.com. */
+const NOTE_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSfw12jhXvBpxgGOglXvyzTkfBPRUWwM74fD7wuEcPhrOS80HQ/formResponse";
+const NOTE_EMAIL_FIELD = "entry.1734534814";
+const NOTE_MESSAGE_FIELD = "entry.406808152";
 
 /* Axonometric ink drawing of one room on move-in day.
    Layers reveal with progress p (0..1): empty room -> plan marks -> furniture -> styling.
@@ -577,12 +621,49 @@ function drawRoomLine(svg, idp) {
 
 
 (function () {
-  const ctas = document.querySelectorAll('[data-cta]');
-  ctas.forEach(a => {
-    if (a.dataset.cta === 'email') { a.href = MAILTO; return; }
-    if (FORM_URL) { a.href = FORM_URL; a.target = '_blank'; a.rel = 'noopener'; }
+  // Note pop-up: every [data-note] button opens it; Send posts the note in the background.
+  const ask = document.getElementById('ask');
+  const askForm = document.getElementById('ask-form');
+  const askDone = document.getElementById('ask-done');
+  const askErr = document.getElementById('ask-err');
+  const askSend = document.getElementById('ask-send');
+  const askEmail = document.getElementById('ask-email');
+  const askMsg = document.getElementById('ask-msg');
+  const openAsk = e => {
+    if (e) e.preventDefault();
+    askForm.hidden = false; askDone.hidden = true; askErr.hidden = true;
+    document.documentElement.classList.add('ask-open');
+    if (typeof ask.showModal === 'function') ask.showModal(); else ask.setAttribute('open', '');
+    setTimeout(() => askEmail.focus(), 60);
+  };
+  const closeAsk = () => { if (typeof ask.close === 'function') ask.close(); else { ask.removeAttribute('open'); document.documentElement.classList.remove('ask-open'); } };
+  ask.addEventListener('close', () => document.documentElement.classList.remove('ask-open'));
+  document.querySelectorAll('[data-note]').forEach(a => a.addEventListener('click', openAsk));
+  ask.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', closeAsk));
+  ask.addEventListener('click', e => { if (e.target === ask) closeAsk(); });
+  const showErr = text => { askErr.textContent = text; askErr.hidden = false; };
+  askForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    askErr.hidden = true;
+    const email = askEmail.value.trim(), message = askMsg.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('Please add an email we can write back to.'); askEmail.focus(); return; }
+    if (!message) { showErr('Please keep a short message.'); askMsg.focus(); return; }
+    const done = () => { askForm.hidden = true; askDone.hidden = false; askForm.reset(); askDone.querySelector('button').focus(); };
+    if (askForm.elements.website.value) { done(); return; }
+    if (!NOTE_ACTION) { showErr('Sending isn’t set up yet. Please email roomready4u@gmail.com.'); return; }
+    askSend.disabled = true; askSend.textContent = 'Sending…';
+    try {
+      const body = new URLSearchParams();
+      body.append(NOTE_EMAIL_FIELD, email);
+      body.append(NOTE_MESSAGE_FIELD, message);
+      await fetch(NOTE_ACTION, { method: 'POST', mode: 'no-cors', body });
+      done();
+    } catch (err) {
+      showErr('That didn’t go through. Please try again, or email roomready4u@gmail.com.');
+    } finally {
+      askSend.disabled = false; askSend.textContent = 'Send';
+    }
   });
-  if (!FORM_URL) document.getElementById('pending').hidden = false;
 
   // Story: scroll position sets a target; each frame eases 20% toward it.
   const story = drawRoomLine(document.getElementById('plate-story'), 'ps');

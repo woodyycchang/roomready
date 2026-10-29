@@ -229,7 +229,8 @@ html.ask-open { overflow: hidden; }
 .ask-lede { margin: 12px 0 0; font-size: 15px; line-height: 1.6; color: var(--grey); }
 .ask-lab { display: block; margin: 24px 0 8px; font: 700 11px/1 var(--sans); letter-spacing: 0.15em; text-transform: uppercase; }
 .ask input, .ask textarea { display: block; width: 100%; border: 1px solid #cfcac3; border-radius: 0; background: #fff; color: var(--ink); font: 400 16px/1.55 var(--sans); padding: 12px 14px; }
-.ask textarea { min-height: 168px; resize: vertical; }
+.ask textarea { min-height: 88px; resize: vertical; }
+.ask-opt { font-weight: 400; letter-spacing: 0.04em; text-transform: none; color: var(--grey); }
 .ask input:focus-visible, .ask textarea:focus-visible { outline: 2px solid var(--ink); outline-offset: -1px; }
 .ask-hp { position: absolute !important; left: -9999px; width: 1px !important; height: 1px; opacity: 0; }
 .ask-send { width: 100%; margin-top: 24px; cursor: pointer; font-family: var(--sans); }
@@ -390,6 +391,8 @@ html.ask-open { overflow: hidden; }
     </fieldset>
     <label class="ask-lab" for="ask-email">Your email</label>
     <input id="ask-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+    <label class="ask-lab" for="ask-note">Anything else? <span class="ask-opt">(optional)</span></label>
+    <textarea id="ask-note" name="note" rows="3" maxlength="1000" placeholder="For example, when you’re moving or what you’d want help with"></textarea>
     <input class="ask-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     <p class="ask-err" id="ask-err" role="alert" hidden></p>
     <button class="btn ask-send" type="submit" id="ask-send">Join the list</button>
@@ -634,6 +637,7 @@ function drawRoomLine(svg, idp) {
   const askErr = document.getElementById('ask-err');
   const askSend = document.getElementById('ask-send');
   const askEmail = document.getElementById('ask-email');
+  const askNote = document.getElementById('ask-note');
   const askChecks = ['unfurnished', 'signed', 'stay'].map(k => [document.getElementById('ask-' + k), document.getElementById('fit-' + k)]);
   const openAsk = e => {
     if (e) e.preventDefault();
@@ -660,7 +664,7 @@ function drawRoomLine(svg, idp) {
       'Unfurnished apartment: ' + (yes[0] ? 'yes' : 'no'),
       'Signed the lease from abroad without seeing it: ' + (yes[1] ? 'yes' : 'no'),
       'Staying in the US two years or more: ' + (yes[2] ? 'yes' : 'no')
-    ].join('\n');
+    ].join('\n') + (askNote.value.trim() ? '\nTheir note: ' + askNote.value.trim() : '');
     const done = () => { askForm.hidden = true; askDone.hidden = false; askForm.reset(); askDone.querySelector('button').focus(); };
     if (askForm.elements.website.value) { done(); return; }
     if (!NOTE_ACTION) { showErr('Sign-up isn’t set up yet. Please email roomready4u@gmail.com.'); return; }

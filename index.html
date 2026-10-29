@@ -230,6 +230,8 @@ html.ask-open { overflow: hidden; }
 .ask-lab { display: block; margin: 24px 0 8px; font: 700 11px/1 var(--sans); letter-spacing: 0.15em; text-transform: uppercase; }
 .ask input, .ask textarea { display: block; width: 100%; border: 1px solid #cfcac3; border-radius: 0; background: #fff; color: var(--ink); font: 400 16px/1.55 var(--sans); padding: 12px 14px; }
 .ask textarea { min-height: 88px; resize: vertical; }
+.ask-more-line { margin: 6px 0 0; font-size: 12px; line-height: 1.5; color: var(--grey); }
+.ask-more { border: 0; background: none; padding: 0; font: inherit; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .ask-opt { font-weight: 400; letter-spacing: 0.04em; text-transform: none; color: var(--grey); }
 .ask input:focus-visible, .ask textarea:focus-visible { outline: 2px solid var(--ink); outline-offset: -1px; }
 .ask-hp { position: absolute !important; left: -9999px; width: 1px !important; height: 1px; opacity: 0; }
@@ -391,12 +393,15 @@ html.ask-open { overflow: hidden; }
     </fieldset>
     <label class="ask-lab" for="ask-email">Your email</label>
     <input id="ask-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
-    <label class="ask-lab" for="ask-note">Anything else? <span class="ask-opt">(optional)</span></label>
-    <textarea id="ask-note" name="note" rows="3" maxlength="1000" placeholder="For example, when you’re moving or what you’d want help with"></textarea>
+    <div class="ask-note-wrap" id="ask-note-wrap" hidden>
+      <label class="ask-lab" for="ask-note">Your note <span class="ask-opt">(optional)</span></label>
+      <textarea id="ask-note" name="note" rows="3" maxlength="1000" placeholder="For example, when you’re moving or what you’d want help with"></textarea>
+    </div>
     <input class="ask-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     <p class="ask-err" id="ask-err" role="alert" hidden></p>
     <button class="btn ask-send" type="submit" id="ask-send">Join the list</button>
     <p class="ask-fine">We only use your email for RoomReady updates and to write back to you.</p>
+    <p class="ask-more-line" id="ask-more-line">Want to tell us more? <button type="button" class="ask-more" id="ask-more" aria-controls="ask-note-wrap" aria-expanded="false">Add a note</button></p>
   </form>
   <div class="ask-in" id="ask-done" hidden>
     <p class="label">You’re on the list</p>
@@ -638,10 +643,15 @@ function drawRoomLine(svg, idp) {
   const askSend = document.getElementById('ask-send');
   const askEmail = document.getElementById('ask-email');
   const askNote = document.getElementById('ask-note');
+  const askNoteWrap = document.getElementById('ask-note-wrap');
+  const askMore = document.getElementById('ask-more');
+  const askMoreLine = document.getElementById('ask-more-line');
+  askMore.addEventListener('click', () => { askNoteWrap.hidden = false; askMoreLine.hidden = true; askMore.setAttribute('aria-expanded', 'true'); askNote.focus(); });
   const askChecks = ['unfurnished', 'signed', 'stay'].map(k => [document.getElementById('ask-' + k), document.getElementById('fit-' + k)]);
   const openAsk = e => {
     if (e) e.preventDefault();
     askForm.hidden = false; askDone.hidden = true; askErr.hidden = true;
+    if (!askNote.value.trim()) { askNoteWrap.hidden = true; askMoreLine.hidden = false; askMore.setAttribute('aria-expanded', 'false'); }
     askChecks.forEach(([box, fit]) => { if (fit && fit.getAttribute('aria-pressed') === 'true') box.checked = true; });
     document.documentElement.classList.add('ask-open');
     if (typeof ask.showModal === 'function') ask.showModal(); else ask.setAttribute('open', '');

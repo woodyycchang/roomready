@@ -183,6 +183,8 @@ h2 { font-size: clamp(30px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -0.
 .foot-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 32px; padding-block: 34px 40px; font: 400 12px/1.6 var(--sans); letter-spacing: 0.04em; }
 .foot-in p { margin: 0; }
 .foot .logo { color: var(--paper); width: 120px; }
+.foot a { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
+.foot a:hover { text-decoration: none; }
 
 /* responsive */
 @media (max-width: 980px) {
@@ -415,6 +417,7 @@ html.ask-open { overflow: hidden; }
   <div class="wrap foot-in">
     <span class="logo" role="img" aria-label="RoomReady"></span>
     <p>RoomReady is a student project at Cornell. Prices may change. Photos are from Unsplash, not from RoomReady jobs.</p>
+    <p>Email us at <a href="mailto:roomready4u@gmail.com">roomready4u@gmail.com</a></p>
     <p>© 2026 RoomReady</p>
   </div>
 </footer>

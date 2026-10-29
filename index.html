@@ -238,7 +238,13 @@ html.ask-open { overflow: hidden; }
 .ask-fine { margin: 14px 0 0; font-size: 12px; line-height: 1.5; color: var(--grey); }
 .ask-x { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
 .ask-x:hover { background: var(--plate); }
-@media (max-width: 760px) { .ask textarea { min-height: 212px; } }
+.ask-set { border: 0; margin: 26px 0 0; padding: 0; min-width: 0; }
+.ask-set legend { padding: 0; margin: 0 0 4px; font: 700 11px/1 var(--sans); letter-spacing: 0.15em; text-transform: uppercase; }
+.ask-check { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: start; padding: 13px 0; border-bottom: 1px solid var(--hair); font-size: 15px; line-height: 1.45; cursor: pointer; }
+.ask .ask-check input { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; margin: 1px 0 0; padding: 0; border: 1.5px solid var(--ink); background: #fff; display: grid; place-content: center; cursor: pointer; }
+.ask .ask-check input:checked { background: var(--ink); }
+.ask .ask-check input:checked::after { content: ""; width: 10px; height: 5px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: translateY(-1px) rotate(-45deg); }
+.ask .ask-check input:focus-visible { outline: 2px solid var(--clay); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .ask[open], .ask[open]::backdrop { animation: none; } }
 </style>
 </head>
@@ -252,16 +258,16 @@ html.ask-open { overflow: hidden; }
       <a href="#faq">Questions</a>
     </nav>
     <a class="logo" href="#top" aria-label="RoomReady home"></a>
-    <div class="nav-right"><a class="link-cta" data-note href="#signup">I’m interested</a></div>
+    <div class="nav-right"><a class="link-cta" data-note href="#signup">Join the list</a></div>
   </div>
   <div class="wrap hero-body">
     <h1>We set up your apartment before you land.</h1>
     <div class="hero-row">
       <div>
         <p class="sub">You send photos of rooms you like. We plan your place around them and have everything delivered and built before your flight.</p>
-        <p class="fine">We’re five Cornell students and we haven’t launched yet. If this sounds useful, send us a note and we’ll write back.</p>
+        <p class="fine">We’re five Cornell students and we haven’t launched yet. Join the early list and we’ll email you when we’re ready.</p>
       </div>
-      <div class="hero-cta"><a class="btn btn-white" data-note href="#signup">I’m interested</a></div>
+      <div class="hero-cta"><a class="btn btn-white" data-note href="#signup">Join the early list</a></div>
     </div>
     <p class="credit">Inspiration photo · Clay Banks / Unsplash</p>
   </div>
@@ -319,7 +325,7 @@ html.ask-open { overflow: hidden; }
       <div class="price-foot">
         <p>That covers design, furniture, delivery, assembly and styling. It’s a one-time payment, not a rental, so you keep everything.</p>
         <p>Half is due when you approve the plan, the rest before we install. Booking early takes 5% off.</p>
-        <p class="note">We’re still testing these prices, so they could change. Sending a note doesn’t commit you to anything.</p>
+        <p class="note">We’re still testing these prices, so they could change. Joining the list doesn’t commit you to anything.</p>
       </div>
     </div>
   </section>
@@ -338,7 +344,7 @@ html.ask-open { overflow: hidden; }
           <li><button type="button" class="check" id="fit-stay" aria-pressed="false"><span class="box"><svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#FEFDFB" stroke-width="2.2" stroke-linecap="square"/></svg></span>I’ll study in the US for two years or more.</button></li>
         </ul>
         <p class="result" id="fit-result" aria-live="polite">Tap the ones that are true for you.</p>
-        <a class="btn btn-line" data-note href="#signup">I’m interested</a>
+        <a class="btn btn-line" data-note href="#signup">Join the list</a>
       </div>
     </div>
   </section>
@@ -354,7 +360,7 @@ html.ask-open { overflow: hidden; }
         <details class="qa"><summary>Who pays, me or my parents? <span class="pm" aria-hidden="true"></span></summary><p>Whoever you like. You plan it with us and either of you can pay. The price is fixed before we buy anything.</p></details>
         <details class="qa"><summary>Is RoomReady open yet? <span class="pm" aria-hidden="true"></span></summary><p>No. We’re five Cornell students, and we’re still working out the details by talking to students who are moving.</p></details>
         <details class="qa"><summary>Which cities will you start in? <span class="pm" aria-hidden="true"></span></summary><p>A few college towns first. If you tell us where you’re moving, it helps us decide.</p></details>
-        <details class="qa"><summary>What happens after I send a note? <span class="pm" aria-hidden="true"></span></summary><p>One of us will write back to say hello. If you have time, we may ask a few questions about your move. We won’t try to sell you anything.</p></details>
+        <details class="qa"><summary>What happens after I join the list? <span class="pm" aria-hidden="true"></span></summary><p>We’ll email you when RoomReady is ready. Before then, one of us may write to ask how your move went. We won’t share your email with anyone.</p></details>
       </div>
     </div>
   </section>
@@ -362,9 +368,9 @@ html.ask-open { overflow: hidden; }
   <section class="closing" id="signup" aria-labelledby="signup-title">
     <img class="bg" src="img/bright.jpg" alt="" loading="lazy">
     <div class="wrap">
-      <p class="big" id="signup-title">Want to hear more?</p>
-      <p class="closing-copy">Send us a quick note. We already wrote it, so you only need to add your email.</p>
-      <div class="closing-cta"><a class="btn btn-white" data-note href="#signup">Send a note</a></div>
+      <p class="big" id="signup-title">Join the early list.</p>
+      <p class="closing-copy">We’ll email you when we’re ready. We may also ask how your move went.</p>
+      <div class="closing-cta"><a class="btn btn-white" data-note href="#signup">Join the list</a></div>
     </div>
     <p class="credit">Inspiration photo · Clay Banks / Unsplash</p>
   </section>
@@ -373,26 +379,26 @@ html.ask-open { overflow: hidden; }
 <dialog class="ask" id="ask" aria-labelledby="ask-title">
   <button type="button" class="ask-x" data-close aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
   <form class="ask-in" id="ask-form" novalidate>
-    <p class="label">A note to RoomReady</p>
-    <h2 id="ask-title">Send us a quick note</h2>
-    <p class="ask-lede">We already wrote it. Add your email, change anything you like, and press send.</p>
+    <p class="label">RoomReady isn’t open yet</p>
+    <h2 id="ask-title">Join the early list</h2>
+    <p class="ask-lede">We’ll email you when we’re ready. We may also ask how your move went.</p>
+    <fieldset class="ask-set">
+      <legend>Which of these are true for you?</legend>
+      <label class="ask-check"><input type="checkbox" id="ask-unfurnished"><span>My apartment comes unfurnished.</span></label>
+      <label class="ask-check"><input type="checkbox" id="ask-signed"><span>I sign my lease from abroad, without seeing the place.</span></label>
+      <label class="ask-check"><input type="checkbox" id="ask-stay"><span>I’ll study in the US for two years or more.</span></label>
+    </fieldset>
     <label class="ask-lab" for="ask-email">Your email</label>
     <input id="ask-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
-    <label class="ask-lab" for="ask-msg">Message</label>
-    <textarea id="ask-msg" name="message" rows="6" required>Hi RoomReady team,
-
-I’m interested in RoomReady and I’d like to hear more when you’re ready.
-
-Thanks!</textarea>
     <input class="ask-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     <p class="ask-err" id="ask-err" role="alert" hidden></p>
-    <button class="btn ask-send" type="submit" id="ask-send">Send</button>
-    <p class="ask-fine">Your note goes to roomready4u@gmail.com. We only use your email to write back to you.</p>
+    <button class="btn ask-send" type="submit" id="ask-send">Join the list</button>
+    <p class="ask-fine">We only use your email for RoomReady updates and to write back to you.</p>
   </form>
   <div class="ask-in" id="ask-done" hidden>
-    <p class="label">Sent</p>
+    <p class="label">You’re on the list</p>
     <h2>Thank you.</h2>
-    <p class="ask-lede">Your note is on its way. One of us will write back soon.</p>
+    <p class="ask-lede">We’ll email you when we’re ready. One of us may write sooner to ask about your move.</p>
     <button class="btn ask-send" type="button" data-close>Close</button>
   </div>
 </dialog>
@@ -406,7 +412,7 @@ Thanks!</textarea>
 </footer>
 
 <script>
-/* The note pop-up posts to a Google Form in the RoomReady account. A script there emails each note to roomready4u@gmail.com. */
+/* The early-list pop-up posts to a Google Form in the RoomReady account. A script there emails each signup to roomready4u@gmail.com. */
 const NOTE_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSfw12jhXvBpxgGOglXvyzTkfBPRUWwM74fD7wuEcPhrOS80HQ/formResponse";
 const NOTE_EMAIL_FIELD = "entry.1734534814";
 const NOTE_MESSAGE_FIELD = "entry.406808152";
@@ -621,17 +627,18 @@ function drawRoomLine(svg, idp) {
 
 
 (function () {
-  // Note pop-up: every [data-note] button opens it; Send posts the note in the background.
+  // Early-list pop-up: every [data-note] button opens it; the button posts the signup in the background.
   const ask = document.getElementById('ask');
   const askForm = document.getElementById('ask-form');
   const askDone = document.getElementById('ask-done');
   const askErr = document.getElementById('ask-err');
   const askSend = document.getElementById('ask-send');
   const askEmail = document.getElementById('ask-email');
-  const askMsg = document.getElementById('ask-msg');
+  const askChecks = ['unfurnished', 'signed', 'stay'].map(k => [document.getElementById('ask-' + k), document.getElementById('fit-' + k)]);
   const openAsk = e => {
     if (e) e.preventDefault();
     askForm.hidden = false; askDone.hidden = true; askErr.hidden = true;
+    askChecks.forEach(([box, fit]) => { if (fit && fit.getAttribute('aria-pressed') === 'true') box.checked = true; });
     document.documentElement.classList.add('ask-open');
     if (typeof ask.showModal === 'function') ask.showModal(); else ask.setAttribute('open', '');
     setTimeout(() => askEmail.focus(), 60);
@@ -645,13 +652,19 @@ function drawRoomLine(svg, idp) {
   askForm.addEventListener('submit', async e => {
     e.preventDefault();
     askErr.hidden = true;
-    const email = askEmail.value.trim(), message = askMsg.value.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('Please add an email we can write back to.'); askEmail.focus(); return; }
-    if (!message) { showErr('Please keep a short message.'); askMsg.focus(); return; }
+    const email = askEmail.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('Please add an email we can write to.'); askEmail.focus(); return; }
+    const yes = askChecks.map(([box]) => box.checked);
+    const message = [
+      'Fits ' + yes.filter(Boolean).length + ' of 3',
+      'Unfurnished apartment: ' + (yes[0] ? 'yes' : 'no'),
+      'Signed the lease from abroad without seeing it: ' + (yes[1] ? 'yes' : 'no'),
+      'Staying in the US two years or more: ' + (yes[2] ? 'yes' : 'no')
+    ].join('\n');
     const done = () => { askForm.hidden = true; askDone.hidden = false; askForm.reset(); askDone.querySelector('button').focus(); };
     if (askForm.elements.website.value) { done(); return; }
-    if (!NOTE_ACTION) { showErr('Sending isn’t set up yet. Please email roomready4u@gmail.com.'); return; }
-    askSend.disabled = true; askSend.textContent = 'Sending…';
+    if (!NOTE_ACTION) { showErr('Sign-up isn’t set up yet. Please email roomready4u@gmail.com.'); return; }
+    askSend.disabled = true; askSend.textContent = 'Joining…';
     try {
       const body = new URLSearchParams();
       body.append(NOTE_EMAIL_FIELD, email);
@@ -661,7 +674,7 @@ function drawRoomLine(svg, idp) {
     } catch (err) {
       showErr('That didn’t go through. Please try again, or email roomready4u@gmail.com.');
     } finally {
-      askSend.disabled = false; askSend.textContent = 'Send';
+      askSend.disabled = false; askSend.textContent = 'Join the list';
     }
   });
 
